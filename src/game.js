@@ -5,6 +5,8 @@ const { Splash } = require('./tools/splash.js');
 const { getSetting } = require('./settings.js');
 const scene = require('./scene.js');
 
+console.log('ALPHA RELEASE (MAY BE UNSTABLE) ⚠️')
+
 function startGame() {
   const inputHandler = new InputHandler();
   const renderer = new Renderer(context, canvas);
