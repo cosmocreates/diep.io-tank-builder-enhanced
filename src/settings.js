@@ -16,7 +16,7 @@ const frameRepeatPoints = {
 const unorganized = {
     paused: false,
     arenaDeadzoneOffset: -100,
-    developmentMode: true,
+    developmentMode: false,
 };
 
 function setSetting(query, value) {
