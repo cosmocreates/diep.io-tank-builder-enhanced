@@ -97,6 +97,45 @@ class OutOfBounds extends SceneObject {
     }
 }
 
+class Farm extends SceneObject {
+    constructor() {
+        super();
+        this.summoned = [];
+    }
+
+    newShape() {
+        const arena = getSceneObject('Arena')
+
+        const x = Math.floor(Math.random() * arena.width)
+        const y = Math.floor(Math.random() * arena.height)
+        const shape = new this.constructor.Shape(x, y, 1);
+        this.summoned.push(shape);
+    }
+
+    render(context) {
+        this.summoned.forEach(item => {
+            item.render(context);
+        });
+    }
+}
+
+Farm.Shape = class Shape extends SceneObject {
+    constructor(x, y, radius) {
+        super();
+        this.x = x;
+        this.y = y;
+        this.radius = radius
+
+        this.appearance = {
+            fillColor: 'rgb(200, 200, 200)'
+        };
+    }
+
+    render(context) {
+        context.rect(this.x, this.y, this.radius, this.radius)
+    }
+};
+
 class Arena extends SceneObject {
     constructor(x, y, width, height) {
         super();
@@ -153,5 +192,6 @@ module.exports = {
     Camera,
     Player,
     OutOfBounds,
+    Farm,
     Arena
 };

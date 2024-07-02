@@ -9,10 +9,14 @@ const strokeBleedFactors = {
 
 const circleClosingPoint = Math.PI * 2;
 
+const frameRepeatPoints = {
+    shapeSpawn: 50
+}
+
 const unorganized = {
     paused: false,
     arenaDeadzoneOffset: -100,
-    developmentMode: false,
+    developmentMode: true,
 };
 
 function setSetting(query, value) {
@@ -27,6 +31,7 @@ module.exports = {
     strokeWidths,
     strokeBleedFactors,
     circleClosingPoint,
+    frameRepeatPoints,
     setSetting,
     getSetting
 };

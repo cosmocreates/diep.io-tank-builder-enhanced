@@ -1,16 +1,23 @@
-const { scene, getSceneObject } = require('../scene.js');
+const { scene, getSceneObject, Farm } = require('../scene.js');
 const { strokeWidths, strokeBleedFactors, getSetting } = require('../settings.js');
 const { stepMovement, stepCollision } = require('./physics.js');
+const { frameRepeatPoints } = require('../settings.js');
 
 class Renderer {
     constructor(context, canvas) {
         this.context = context;
         this.canvas = canvas;
+        this.frame = 0;
+        this.farm = new Farm();
         this.renderScene = this.renderScene.bind(this);
     }
 
     clear() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+
+    animationFrameLoopPassed(targetFrame) {
+        return this.frame % targetFrame === 0
     }
 
     renderScene() {
@@ -23,6 +30,11 @@ class Renderer {
         if (!getSetting('paused')) {
             stepMovement();
             stepCollision();
+            if (this.animationFrameLoopPassed(frameRepeatPoints.shapeSpawn)) {
+                {
+                    this.farm.newShape()
+                }
+            }
         }
 
         scene.forEach(sceneObject => {
